@@ -12,7 +12,7 @@ import Signup from "../user/signup";
 
   const Navigation = () => {
     const [user, setUser] = useState(false)
-
+   
     const submitSignup = async () => {
         const user = {
             first_name: "josh",
@@ -72,7 +72,7 @@ import Signup from "../user/signup";
         return (
         
         <div>
-            
+            {/* Home icon -> login button -> if logged in logout button */}
             <button onClick={() =>submitSignup()}>Sign Up</button>
             <button onClick={() => submitLogin()}>Login</button>
             

@@ -63,13 +63,11 @@ apiRouter.post('/api/login', async (request, response) => {
     return response.status(401).json({ error: 'invalid user or password' })
   })
 
-apiRouter.get('', (request, response) => {
-    let posts = {
-        post: "random"
-    }
-    return response.status(200).json(posts)
+  apiRouter.get('/api/users', (request, response) => {
+    User.find({}).then(users => {
+      response.json(users)
+      })
   })
-
 
 
 module.exports = apiRouter
