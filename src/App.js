@@ -1,10 +1,11 @@
 
 import './App.css';
-
+import Dashboard from './dashboard/dashboard';
 function App() {
   return (
     <div className="App">
-      Hello
+      {/* Dashboard is the main class, this connects everything */}
+      <Dashboard/>
     </div>
   );
 }
