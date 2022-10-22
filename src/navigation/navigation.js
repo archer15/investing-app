@@ -1,84 +1,55 @@
-import React, { Component, useState, useEffect } from 'react';
-import {
-    BrowserRouter,
-    Switch,
-    Route
-  } from "react-router-dom"; 
-  import axios from 'axios';
+import React from "react";
+import { Link } from "react-router-dom";
 
+const Navigation = ({ user, logout }) => {
+  return (
+    <nav className="max-w-[1640px] mx-auto flex justify-between items-center py-4 px-16">
+      <div className="hover:cursor-pointer">
+        <Link className="flex space-x-2 items-center" to="/" href="">
+          <img src="" alt="logo" />
+          <span>InvestingApp</span>
+        </Link>
+      </div>
+      {/* Home icon -> login button -> if logged in logout button */}
 
-import Login from "../user/login";
-import Signup from "../user/signup";
+      {user !== null ? (
+        <div className="flex items-center space-x-4">
+          <div className="flex space-x-2 items-center">
+            <img className="rounded-full" src="" alt="displayPicture" />{" "}
+            <span>{user?.first_name}</span>
+          </div>
 
-  const Navigation = () => {
-    const [user, setUser] = useState(false)
-   
-    const submitSignup = async () => {
-        const user = {
-            first_name: "josh",
-            last_name: "archer",
-            email: "joshua.archer@gmail.com",
-            password: "1234"
-
-        }
-    
-        await axios.post(`http://localhost:3001/api/register`, user)
-        .then(response => {
-            console.log(response.data)
-            if(response.error) {
-                console.log("error")
-                return
-            } else {
-                //
-                
-            }
-        })
-
-    }
-
-
-    const submitLogin = async () => {
-        const user = {
-            
-            email: "joshua.archer@gmail.com",
-            password: "1234",
-
-        }
-        await axios.post(`http://localhost:3001/api/login`, user)
-        .then(response => {
-            console.log(response.data)
-            if(response.error) {
-                console.log("error")
-                return
-            } else {
-                setUser(response.data.user)
-                
-            }
-        })
-    }
-
-
-
-
-
-    if(user) {
-        return ( 
-            <div>{user.email}</div>
-            
-        )
-    }
-
-    else {
-        return (
-        
-        <div>
-            {/* Home icon -> login button -> if logged in logout button */}
-            <button onClick={() =>submitSignup()}>Sign Up</button>
-            <button onClick={() => submitLogin()}>Login</button>
-            
+          <Link
+            to=""
+            onClick={() => {
+              logout();
+            }}
+            className="px-3 py-3 hover:bg-blue-500/50 rounded"
+          >
+            Log out
+          </Link>
         </div>
-    )
-  }
-}
+      ) : (
+        <div>
+          <Link
+            to="signup"
+            href=""
+            className="px-3 py-3 hover:bg-blue-500/50 border-r rounded"
+          >
+            Sign Up
+          </Link>
 
-  export default Navigation
+          <Link
+            to="login"
+            href=""
+            className="px-3 py-3 hover:bg-blue-500/50 rounded"
+          >
+            Login
+          </Link>
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navigation;
