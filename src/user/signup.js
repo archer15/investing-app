@@ -1,9 +1,10 @@
-import { getValue } from "@testing-library/user-event/dist/utils";
 import React, { useRef, useState } from "react";
 import axios from "axios";
 
 const Signup = () => {
-  const registerData = {
+  const [error, setError] = useState(null);
+
+  let registerData = {
     first_name: "",
     last_name: "",
     email: "",
@@ -23,11 +24,19 @@ const Signup = () => {
         console.log(response.data);
         if (response.error) {
           console.log("error");
+          setError(response.error.message);
           return;
         } else {
-          //
+          setError(null);
         }
       });
+
+    registerData = {
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: "",
+    };
   };
 
   return (
@@ -43,6 +52,7 @@ const Signup = () => {
             First Name:
           </label>
           <input
+          required
             className="border"
             autoFocus
             type="text"
@@ -54,6 +64,7 @@ const Signup = () => {
             Last Name:
           </label>
           <input
+          required
             className="border"
             type="text"
             onChange={(e) => updateFields("last_name", e.target.value)}
@@ -65,6 +76,7 @@ const Signup = () => {
             Email:
           </label>
           <input
+          required
             className="border"
             type="email"
             onChange={(e) => updateFields("email", e.target.value)}
@@ -75,10 +87,14 @@ const Signup = () => {
             Password:
           </label>
           <input
+          required
             className="border"
             type="password"
             onChange={(e) => updateFields("password", e.target.value)}
           />
+        </div>
+        <div className={`${error ? "visible" : "invisible"} text-center m-0`}>
+          <span>Error: {error}</span>
         </div>
         <div>
           <button

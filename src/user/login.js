@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 const Login = ({ setUser }) => {
-  const loginData = {
+  const [error, setError] = useState(null);
+
+  let loginData = {
     email: "",
     password: "",
   };
@@ -20,12 +22,18 @@ const Login = ({ setUser }) => {
         console.log(response.data);
         if (response.error) {
           console.log("error");
+          setError(response.error.message);
           return;
         } else {
           setUser(response.data.user);
           console.log(response.data.user);
+          setError(null);
         }
       });
+    loginData = {
+      email: "",
+      password: "",
+    };
   };
 
   return (
@@ -41,6 +49,7 @@ const Login = ({ setUser }) => {
             Email:
           </label>
           <input
+            required
             className="border"
             type="email"
             onChange={(e) => updateFields("email", e.target.value)}
@@ -51,10 +60,14 @@ const Login = ({ setUser }) => {
             Password:
           </label>
           <input
+            required
             className="border"
             type="password"
             onChange={(e) => updateFields("password", e.target.value)}
           />
+        </div>
+        <div className={`${error ? "visible" : "invisible"} text-center`}>
+          <span>Error: {error}</span>
         </div>
         <div>
           <button
