@@ -33,3 +33,8 @@ export const login = (user) => {
     })
     return log
 }
+export const logoutBrowser = () => {
+    if (typeof window !== 'undefined') {
+        localStorage.removeItem('jwt');
+    }
+};
