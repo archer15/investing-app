@@ -5,7 +5,7 @@ import {
     Route
   } from "react-router-dom"; 
   import axios from 'axios';
-
+import { login } from '../API/user-auth';
 
 import Login from "../user/login";
 import Signup from "../user/signup";
@@ -44,21 +44,18 @@ import Signup from "../user/signup";
             password: "1234",
 
         }
-        await axios.post(`http://localhost:3001/api/login`, user)
-        .then(response => {
-            console.log(response.data)
-            if(response.error) {
-                console.log("error")
-                return
-            } else {
-                setUser(response.data.user)
-                
-            }
-        })
+        const loggedUser = await login(user)
+        if(loggedUser.user) {
+            setUser(loggedUser.user)
+        } else if(loggedUser.email) {
+            setUser(loggedUser)
+        }
     }
 
 
-
+    // useEffect(() => {
+    //     console.log("LOGGED IN AS ", user.user.email)
+    // }, [user])
 
 
     if(user) {
