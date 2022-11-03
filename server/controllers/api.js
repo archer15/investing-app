@@ -1,6 +1,7 @@
 const express = require('express')
 const apiRouter = express.Router()
 const User = require('../models/UserSchema.js')
+const Post = require('../models/PostSchema.js')
 const bcrypt = require('bcrypt')
 const scrub = ({ password, ...user }) => user
 const scrubAuthentic = ({ password, ...user }) => user
@@ -9,7 +10,6 @@ const mongoose = require('mongoose')
 
 
 const url = process.env.DBURL
-            
 
 mongoose.connect(url)
   .then((result) => {
@@ -38,6 +38,28 @@ apiRouter.post('/api/register', async (request, response) => {
         return response.status(200).json({user: scrubAuthentic(user.toJSON())})
     })
 
+})
+apiRouter.post('/api/posts', async (request, response) => {
+  console.log('called')
+
+      const body = request.body
+  
+      const post = await new Post({
+        title: body.title,
+        company_name: body.company_name,
+       date: body.date,
+       description: body.description,
+       asking_price: body.asking_price,
+       quanitity_total: body.quanitity_total,
+       quanitity_remaining: body.quanitity_remaining,
+       status: body.status, 
+      })
+      console.log("saving", post)
+      post.save().then(post => {
+          console.log('saved')
+          return response.status(200).json({post})
+      })
+  
 })
 apiRouter.post('/api/login', async (request, response) => {
     console.log("post request initialised")
@@ -68,6 +90,14 @@ apiRouter.post('/api/login', async (request, response) => {
       response.json(users)
       })
   })
+
+  apiRouter.get('/api/posts', (request, response) => {
+    Post.find({}).then(posts => {
+      response.json(posts)
+      })
+      
+  })
+
 
 
 module.exports = apiRouter

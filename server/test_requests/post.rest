@@ -1,0 +1,12 @@
+POST http://localhost:3001/api/posts
+Content-Type: application/json
+
+{
+        "title": "test",
+        "company_name": "Wrong Password",
+        "description": "hello",
+        "asking_price": 100,
+        "quanitity_total": 100,
+        "quanitity_remaining": 100,
+        "status": "active",
+}
