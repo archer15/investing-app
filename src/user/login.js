@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { login } from "../API/user-auth";
-import { redirect  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const Login = ({ user, setUser }) => {
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
 
   let loginData = {
     email: "",
@@ -15,30 +16,34 @@ const Login = ({ user, setUser }) => {
   };
 
   const submitLogin = async (e) => {
-    var tempUser
-    e.preventDefault()
+    var tempUser;
+    e.preventDefault();
     let resUser = await login(loginData).catch((error) => {
-        console.log("error", error)
-        setError(error.response.data.error)
-    })
-    if(resUser.user) {
-        setUser(resUser.user)
-        setError(null)
-        localStorage.setItem('jwt', JSON.stringify(resUser));
-        
+      console.log("error", error);
+      setError(error.response.data.error);
+    });
+    if (resUser.user) {
+      setUser(resUser.user);
+      setError(null);
+      localStorage.setItem("jwt", JSON.stringify(resUser));
+      navigate("/");
     }
-    
-    
-    
-    
   };
-  if(user) {
-    return (<div className="text-center py-16 text-2xl   ">
+  if (user) {
+    return (
+      <div className="text-center py-16 text-2xl   ">
         <p className="mb-16">You are already logged in.</p>
-         <a href="/" className="border px-10 py-10 rounded-full text-white bg-black">Back to home page</a>
-      </div>)
+        <a
+          href="/"
+          className="border px-10 py-10 rounded-full text-white bg-black"
+        >
+          Back to home page
+        </a>
+      </div>
+    );
   } else {
-    return (<div>
+    return (
+      <div>
         <form
           onSubmit={(e) => submitLogin(e)}
           className="flex flex-col items-center border max-w-[1440px] mx-auto px-6 py-12 space-y-4"
@@ -77,8 +82,8 @@ const Login = ({ user, setUser }) => {
             </button>
           </div>
         </form>
-      </div>)
+      </div>
+    );
   }
-    
 };
 export default Login;

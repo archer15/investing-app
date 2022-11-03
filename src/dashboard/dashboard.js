@@ -8,10 +8,10 @@ import axios from "axios";
 import PostList from "./posts/PostList";
 const Dashboard = () => {
   const [user, setUser] = useState(null);
-  
+
   const logout = () => {
     setUser(null);
-    logoutBrowser()
+    logoutBrowser();
   };
 const testFunction = () => {
   console.log('clicked')
@@ -33,11 +33,14 @@ const testFunction = () => {
   })
 }
   useEffect(() => {
-    if (localStorage.getItem('jwt')) {
-        console.log("found this json object", JSON.parse(localStorage.getItem('jwt')))
-        setUser(JSON.parse(localStorage.getItem('jwt')).user)
-      }
-  }, [])
+    if (localStorage.getItem("jwt")) {
+      console.log(
+        "found this json object",
+        JSON.parse(localStorage.getItem("jwt"))
+      );
+      setUser(JSON.parse(localStorage.getItem("jwt")).user);
+    }
+  }, []);
   return (
     <div>
       <Navigation user={user} logout={logout} />
@@ -45,9 +48,12 @@ const testFunction = () => {
       
       <PostList/>
       <Routes>
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/signup" element={<Signup user={user} />} />
 
-        <Route path="/login" element={<Login user={user} setUser={setUser} />} />
+        <Route
+          path="/login"
+          element={<Login user={user} setUser={setUser} />}
+        />
       </Routes>
     </div>
   );
