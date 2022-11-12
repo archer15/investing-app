@@ -21,9 +21,9 @@ export const fetch_posts = () => {
     }
     return posts
 }
-export const list_post = () => {
+export const list_post = (post) => {
     
-    const log = axios.get(`http://localhost:3001/api/posts`)
+    const log = axios.post(`http://localhost:3001/api/post`, post)
     .then(response => {
         //console.log(response.data)
         if(response.error) {

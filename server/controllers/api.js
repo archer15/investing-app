@@ -39,20 +39,21 @@ apiRouter.post('/api/register', async (request, response) => {
     })
 
 })
-apiRouter.post('/api/posts', async (request, response) => {
+apiRouter.post('/api/post', async (request, response) => {
   console.log('called')
 
       const body = request.body
   
       const post = await new Post({
+        user_id: body.user_id,
         title: body.title,
         company_name: body.company_name,
        date: body.date,
        description: body.description,
        asking_price: body.asking_price,
-       quanitity_total: body.quanitity_total,
-       quanitity_remaining: body.quanitity_remaining,
-       status: body.status, 
+       quantity_total: body.quantity_total,
+       quantity_remaining: body.quantity_total,
+       status: "active", 
       })
       console.log("saving", post)
       post.save().then(post => {
