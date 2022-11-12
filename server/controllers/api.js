@@ -21,18 +21,8 @@ apiRouter.post("/api/register", async (request, response) => {
   const body = request.body;
 
 
-  apiRouter.get('/api/posts', (request, response) => {
-    Post.find({}).then(posts => {
-      response.json(posts)
-      })
-      
-  })
-  apiRouter.get('/api/posts:id', (request, response) => {
-    Post.find({user_id: request.params.id}).then(posts => {
-      response.json(posts)
-      })
-      
-  })
+  
+  
 
   const existingEmail = await User.findOne({ email: body.email });
   if (existingEmail) {
@@ -108,6 +98,12 @@ apiRouter.get("/api/posts", (request, response) => {
     response.json(posts);
   });
 });
+apiRouter.get('/api/posts:id', (request, response) => {
+  Post.find({user_id: request.params.id}).then(posts => {
+    response.json(posts)
+    })
+    
+})
 
 apiRouter.put("/api/invest", async (request, response) => {
   console.log(request.body);

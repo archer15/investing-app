@@ -38,18 +38,10 @@ const PostList = ({ user, postList }) => {
                   <span>{post.date}</span>
 
                 </div>
-
-                
-                <div className='relative text-center flex justify-center items-center'>
-                <div className={`absolute left-[5%] md:left-[10%] py-2 px-4 rounded-md text-white ${post.status === "active" ? "bg-green-500": "bg-red-600"}`}>{post.status}</div>
-                    <button className='border py-4 px-8 text-md md:px-32  md:text-lg  bg-blue-600 rounded-lg text-white disabled:opacity-50' disabled={user == null || user._id === post.user_id}>{(user._id === post.user_id) ? "Own Post" : "Invest"}</button>
-                    
-
                 <div className="text-right space-y-2">
                   <div className="">${post.asking_price}</div>
                   <p>{post.quantity_total}</p>
                   <div>{post.quantity_remaining}</div>
-
                 </div>
 
               </div>
