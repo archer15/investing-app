@@ -11,7 +11,6 @@ const PostList = ({ user, postList }) => {
     setSelectedInvestPost(post);
     setToggleInvest(!toggleInvest);
   };
-
   return (
     <div className="max-w-[1440px] mx-auto  py-12 px-12 md:py-6 md:px-12 sm:py-4 sm:px-2">
       <Link
@@ -37,12 +36,14 @@ const PostList = ({ user, postList }) => {
                   <span className="text-xl font-semibold">{post.title}</span>
                   <p>{post.description}</p>
                   <span>{post.date}</span>
+
                 </div>
                 <div className="text-right space-y-2">
                   <div className="">${post.asking_price}</div>
                   <p>{post.quantity_total}</p>
                   <div>{post.quantity_remaining}</div>
                 </div>
+
               </div>
 
               <div className="relative text-center flex justify-center items-center">
@@ -54,7 +55,9 @@ const PostList = ({ user, postList }) => {
                   {post.status}
                 </div>
                 <button
+
                   onClick={() => toggleAndSetInvestmentPost(post)}
+
                   className="border py-4 px-8 text-md md:px-32  md:text-lg  bg-blue-600 rounded-lg text-white disabled:opacity-50"
                   disabled={user == null}
                 >
@@ -67,9 +70,11 @@ const PostList = ({ user, postList }) => {
       ) : (
         <div>no current posts </div>
       )}
+
       {toggleInvest ? (
         <Invest toggleInvest={setToggleInvest} post={selectedInvestPost} />
       ) : null}
+
       {/* {postList.map((item, index) =>  <p><p />)}  */}
     </div>
   );
