@@ -15,10 +15,12 @@ const Navigation = ({ user, logout }) => {
 
       {user !== null ? (
         <div className="flex items-center space-x-4">
-          <div className="flex space-x-2 items-center">
+          <Link className="flex space-x-2 items-center "
+          to="profile/"
+          href="">
             <img className="rounded-full" src="" alt="displayPicture" />{" "}
             <span>{user?.first_name}</span>
-          </div>
+          </Link>
 
           <Link
             to=""

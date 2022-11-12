@@ -7,6 +7,7 @@ import { logoutBrowser } from "../API/user-auth";
 import { fetch_posts } from "../API/posting";
 import PostList from "./posts/PostList";
 import CreatePost from "./posts/CreatePost";
+import UserProfile from "./profiles/UserProfile";
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [postList, setPostList] = useState([])
@@ -54,7 +55,7 @@ const Dashboard = () => {
   return (
     <div>
       <Navigation user={user} logout={logout} />
-      Dashboard
+      
       
       
       <Routes>
@@ -64,6 +65,14 @@ const Dashboard = () => {
         <Route
           path="/login"
           element={<Login user={user} setUser={setUser} />}
+        />
+        <Route
+          path="/profile/"
+          element={<UserProfile user={user}/>}
+        />
+        <Route
+          path="/profile/1"
+          element={<UserProfile currentUser={user}/>}
         />
         <Route
           path="/"

@@ -20,6 +20,20 @@ mongoose
 apiRouter.post("/api/register", async (request, response) => {
   const body = request.body;
 
+
+  apiRouter.get('/api/posts', (request, response) => {
+    Post.find({}).then(posts => {
+      response.json(posts)
+      })
+      
+  })
+  apiRouter.get('/api/posts:id', (request, response) => {
+    Post.find({user_id: request.params.id}).then(posts => {
+      response.json(posts)
+      })
+      
+  })
+
   const existingEmail = await User.findOne({ email: body.email });
   if (existingEmail) {
     return response
@@ -116,6 +130,7 @@ apiRouter.put("/api/invest", async (request, response) => {
   // post.quantity_remaining = 0;
   // post.save();
   response.json({ ownership_amount: 5 });
+
 
   // let ownershipAmount =
   //   ((investment.investment_amount ) * 100) /
