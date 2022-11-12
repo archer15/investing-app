@@ -10,6 +10,7 @@ const UserProfile = ({user}) => {
         console.log("error", error)
     })
     .then(res => {
+        
         let organisedData = res.map((item ) => {
             let newDate = item?.date?.slice(0,10)
             item.date = newDate
@@ -38,7 +39,9 @@ const UserProfile = ({user}) => {
               <div className='flex-col flex text-center w-[50%]'>
                 Your posts
                 <PostList user={user} postList={postList}/> 
+
                 <div className='text-right '>Yosss</div>
+
               </div>
               
             </div>

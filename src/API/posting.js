@@ -1,7 +1,8 @@
 import axios from "axios";
-const URL = 'http://localhost:3001/'
+const URL = "http://localhost:3001/";
 
 export const fetch_posts = () => {
+
     var posts
     try {
         posts = axios.get("http://localhost:3001/api/posts")
@@ -41,19 +42,38 @@ export const fetch_user_post = (id) => {
     }
     return posts
 }
+
+
 export const list_post = (post) => {
-    
-    const log = axios.post(`http://localhost:3001/api/post`, post)
-    .then(response => {
-        //console.log(response.data)
-        if(response.error) {
-            console.log("error")
-            return
-        } else {
-            const posts = response.data
-            console.log(response.data)
-            return posts
-        }
-    })
-    return log
-}
+  const log = axios
+    .post(`http://localhost:3001/api/post`, post)
+    .then((response) => {
+      //console.log(response.data)
+      if (response.error) {
+        console.log("error");
+        return;
+      } else {
+        const posts = response.data;
+        console.log(response.data);
+        return posts;
+      }
+    });
+  return log;
+};
+
+export const invest_in_stock_post = (investment) => {
+  const log = axios
+    .put(`http://localhost:3001/api/invest`, investment)
+    .then((response) => {
+      //console.log(response.data)
+      if (response.error) {
+        console.log("error");
+        return;
+      } else {
+        const investment = response.data;
+        console.log(response.data);
+        return investment;
+      }
+    });
+  return log;
+};
