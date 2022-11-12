@@ -98,6 +98,12 @@ apiRouter.post('/api/login', async (request, response) => {
       })
       
   })
+  apiRouter.get('/api/posts:id', (request, response) => {
+    Post.find({user_id: request.params.id}).then(posts => {
+      response.json(posts)
+      })
+      
+  })
 
 
 
