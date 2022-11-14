@@ -50,6 +50,7 @@ const Dashboard = () => {
       );
       setUser(JSON.parse(localStorage.getItem("jwt")).user);
     }
+    
     loadAllPosts()
   }, []);
   return (

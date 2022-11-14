@@ -3,11 +3,12 @@ import { useState, useRef } from "react";
 import { AiOutlineClose } from "react-icons/ai/";
 import { invest_in_stock_post } from "../../../API/posting";
 
-const Invest = ({ toggleInvest, post }) => {
+const Invest = ({ toggleInvest, post, user }) => {
   const [ownershipAmount, setOwnershipAmount] = useState(0);
   const ownerShipInput = useRef();
   let investment = {
-    id: post._id,
+    post_id: post._id,
+    user_id: user._id,
     investment_amount: 0,
     investment_quantity: 0,
   };
@@ -25,7 +26,7 @@ const Invest = ({ toggleInvest, post }) => {
 
   const buyInvestment = (e) => {
     e.preventDefault();
-    invest_in_stock_post("test");
+    
     investment.investment_quantity = ownershipAmount;
     investment.investment_amount = ownerShipInput.current.value;
 

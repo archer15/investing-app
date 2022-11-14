@@ -1,6 +1,8 @@
 const express = require("express");
 const postRouter = express.Router();
 const Post = require("../models/PostSchema.js");
+const Investment = require("../models/InvestmentSchema.js");
+
 postRouter.get("/api/posts", (request, response) => {
     Post.find({}).then((posts) => {
       response.json(posts);
@@ -14,7 +16,7 @@ postRouter.get("/api/posts", (request, response) => {
     })
 
     postRouter.post("/api/post", async (request, response) => {
-        console.log("called");
+        
       
         const body = request.body;
       
@@ -29,43 +31,42 @@ postRouter.get("/api/posts", (request, response) => {
           quantity_remaining: body.quantity_total,
           status: "active",
         });
-        console.log("saving", post);
+        
         post.save().then((post) => {
-          console.log("saved");
+          
           return response.status(200).json({ post });
         });
       });
 
-      postRouter.put("/api/invest", async (request, response) => {
-        console.log(request.body);
-        let investment = request.body;
+      postRouter.post("/api/invest", async (request, response) => {
+        
       
-        const post = await Post.findOne({ _id: investment.id });
+        const body = request.body;
       
-        if (!post) {
-          return response.status(401).json({ error: "post does not exist" });
-        }
-      
-        console.log(post);
-      
-        // post.user_id = investment.user_id
-        //   ? investment.user_id
-        //   : post.user_id
-        //   ? post.user_id
-        //   : "";
-      
-        // post.quantity_remaining = 0;
-        // post.save();
-        response.json({ ownership_amount: 5 });
-      
-      
-        // let ownershipAmount =
-        //   ((investment.investment_amount ) * 100) /
-        //   post.quantity_remaining;
-      
-        // let remainingAmount = post.quantity_remaining - ownershipAmount;
-        // console.log("yo", remainingAmount);
+        const investment = await new Investment({
+          user_id: request.body.user_id,
+          post_id: body.post_id,
+          investment_amount: body.investment_amount,
+          investment_quantity: body.investment_quantity,
+          status: "active",
+        });
+        console.log("saving", investment);
+        investment.save().then((investment) => {
+          
+
+          return response.status(200).json({ investment });
+        });
       });
+
+      postRouter.get('/api/invest:id',async (request, response) => {
+        Investment.find({user_id: request.params.id}).then((investments) => {
+          console.log(investments)
+          response.json(investments);
+        });
+      
+        
+      });
+
       
 
 

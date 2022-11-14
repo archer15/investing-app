@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Navigation = ({ user, logout }) => {
   return (
-    <nav className="max-w-[1640px] mx-auto flex justify-between items-center py-4 px-16">
+    <nav className="max-w-[1640px] mx-auto flex justify-between items-center py-4 px-16 ">
       <div className="hover:cursor-pointer">
         <Link className="flex space-x-2 items-center" to="/" href="">
           <img src="" alt="logo" />
