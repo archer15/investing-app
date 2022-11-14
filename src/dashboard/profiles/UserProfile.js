@@ -1,9 +1,11 @@
 import React from 'react'
-import { fetch_user_post } from '../../API/posting'
+import { fetch_user_post, fetch_user_investments } from '../../API/posting'
 import { useState, useEffect } from 'react'
 import PostList from '../posts/PostList'
+import InvestmentHistory from '../posts/invest/InvestmentHistory'
 const UserProfile = ({user}) => {
   const [postList, setPostList] = useState([])
+  const [investmentList, setInvestmentList] = useState([])
     console.log("id ", user)
     const loadUserPosts = (id) => {
       fetch_user_post(id).catch((error) => {
@@ -21,9 +23,22 @@ const UserProfile = ({user}) => {
     })
     }
 
+    const loadUserInvestments = (id) => {
+      fetch_user_investments(id).catch((error) => {
+        console.log("error", error)
+    })
+    .then(res => {
+        
+        
+        console.log("investment", res)
+        setInvestmentList(res)
+    })
+    }
+
     useEffect(() => {
         if(user) {
           loadUserPosts(user._id)
+          loadUserInvestments(user._id)
         }
       }, [user]);
       if(user) {
@@ -35,15 +50,19 @@ const UserProfile = ({user}) => {
                 <div > {user.last_name} </div>
                 <div > {user.email} </div>
             </div>
-            <div className='grid grid-col-2 '>
-              <div className='flex-col flex text-center w-[50%]'>
+            <div className='grid grid-cols-2'>
+              <div className='text-center'>
                 Your posts
                 <PostList user={user} postList={postList}/> 
 
-                <div className='text-right '>Yosss</div>
+                
 
               </div>
-              
+              <div className='text-center'>
+                Your Investments
+
+              <div className=''><InvestmentHistory user={user} investmentList={investmentList}></InvestmentHistory>  </div>
+              </div>
             </div>
             
             

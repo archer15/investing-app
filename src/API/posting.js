@@ -63,7 +63,7 @@ export const list_post = (post) => {
 
 export const invest_in_stock_post = (investment) => {
   const log = axios
-    .put(`http://localhost:3001/api/invest`, investment)
+    .post(`http://localhost:3001/api/invest`, investment)
     .then((response) => {
       //console.log(response.data)
       if (response.error) {
@@ -77,3 +77,24 @@ export const invest_in_stock_post = (investment) => {
     });
   return log;
 };
+
+export const fetch_user_investments = (id) => {
+  var invest
+  try {
+    invest = axios.get(`http://localhost:3001/api/invest${id}`)
+      .then(response => {
+          //console.log(response.data)
+          if(response.error) {
+              console.log("error")
+              return
+          } else {
+              const valid = response.data
+              return valid
+          }
+      })
+  }
+  catch(error) {
+
+  }
+  return invest
+}
