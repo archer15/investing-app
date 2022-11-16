@@ -1,0 +1,7 @@
+POST http://localhost:3001/api/invest HTTP/1.1
+content-type: application/json
+
+{
+    "user_id": "636754a71dc81583d8c5bbd1",
+    "status": "active",
+}
