@@ -77,6 +77,22 @@ export const invest_in_stock_post = (investment) => {
     });
   return log;
 };
+export const update_stock_investment = (investment, id) => {
+  const log = axios
+    .put(`http://localhost:3001/api/invest/${id}`, investment)
+    .then((response) => {
+      //console.log(response.data)
+      if (response.error) {
+        console.log("error");
+        return;
+      } else {
+        const investment = response.data;
+        console.log(response.data);
+        return investment;
+      }
+    });
+  return log;
+};
 
 export const fetch_user_investments = (id) => {
   var invest

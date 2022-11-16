@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useRef } from "react";
 import { AiOutlineClose } from "react-icons/ai/";
-import { invest_in_stock_post } from "../../../API/posting";
+import { invest_in_stock_post, update_stock_investment } from "../../../API/posting";
 
 const Invest = ({ toggleInvest, post, user }) => {
   const [ownershipAmount, setOwnershipAmount] = useState(0);
@@ -31,6 +31,7 @@ const Invest = ({ toggleInvest, post, user }) => {
     investment.investment_amount = ownerShipInput.current.value;
 
     invest_in_stock_post(investment);
+    update_stock_investment(investment, investment.post_id)
   };
 
   return (

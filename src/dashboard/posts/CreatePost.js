@@ -86,6 +86,7 @@ const CreatePost = ({ user }) => {
                 type="number"
                 name="price"
                 id="price"
+                min={1}
                 required
                 placeholder="How much money are you asking for?"
               />
@@ -100,6 +101,7 @@ const CreatePost = ({ user }) => {
                 size="40"
                 type="number"
                 name="percent"
+                min={0.01}
                 id="percent"
                 required
               />

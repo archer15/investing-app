@@ -30,8 +30,21 @@ const UserProfile = ({user}) => {
     .then(res => {
         
         
-        console.log("investment", res)
-        setInvestmentList(res)
+      let organisedData = res.map((item ) => {
+        let newDate = item?.investment_date?.slice(0,10)
+        item.date = newDate
+        return item
+        })
+
+    // if(res[1].date) {
+    //     let tempDate = res.date
+    //    let formattedDate = tempDate.slice(0,11) 
+    //    console.log(tempDate, formattedDate)
+    // }
+    
+    
+    console.log(res)
+    setInvestmentList(organisedData)
     })
     }
 
@@ -50,7 +63,7 @@ const UserProfile = ({user}) => {
                 <div > {user.last_name} </div>
                 <div > {user.email} </div>
             </div>
-            <div className='grid grid-cols-2'>
+            <div className='grid grid-cols-1 md:grid-cols-2 '>
               <div className='text-center'>
                 Your posts
                 <PostList user={user} postList={postList}/> 
