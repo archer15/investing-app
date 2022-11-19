@@ -86,9 +86,9 @@ const CreatePost = ({ user }) => {
                 type="number"
                 name="price"
                 id="price"
-                min={1}
+                min={100}
                 required
-                placeholder="How much money are you asking for?"
+                placeholder="minimum of $100"
               />
             </label>
             <label htmlFor="percent" className="text-lg">
@@ -101,7 +101,7 @@ const CreatePost = ({ user }) => {
                 size="40"
                 type="number"
                 name="percent"
-                min={0.01}
+                min={1}
                 id="percent"
                 required
               />

@@ -64,7 +64,7 @@ const PostList = ({ user, postList }) => {
                 <button
                   onClick={() => toggleAndSetInvestmentPost(post)}
                   className="border py-4 px-8 text-md md:px-32  md:text-lg  bg-blue-600 rounded-lg text-white disabled:opacity-50"
-                  disabled={user == null}
+                  disabled={user == null || post.status === "Completed"}
                   hidden={user?._id === post?.user_id}
                 >
                   Invest

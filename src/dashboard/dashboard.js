@@ -8,6 +8,7 @@ import { fetch_posts } from "../API/posting";
 import PostList from "./posts/PostList";
 import CreatePost from "./posts/CreatePost";
 import UserProfile from "./profiles/UserProfile";
+import LiveChat from "./chat/LiveChat";
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [postList, setPostList] = useState([]);
@@ -64,7 +65,7 @@ const Dashboard = () => {
       <Routes>
         <Route path="/signup" element={<Signup user={user} />} />
         <Route path="/create_post" element={<CreatePost user={user} />} />
-
+        <Route path="/message" element={<LiveChat user={user} />} />
         <Route
           path="/login"
           element={<Login user={user} setUser={setUser} />}

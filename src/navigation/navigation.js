@@ -52,6 +52,11 @@ const Navigation = ({ user, logout }) => {
             <span>InvestingApp</span>
           </Link>
         </div>
+        <div className="hover:cursor-pointer">
+          <Link className="flex space-x-2 items-center" to="/message" href="">
+            <span>Messages</span>
+          </Link>
+        </div>
         {/* Home icon -> login button -> if logged in logout button */}
 
         {user !== null ? (
